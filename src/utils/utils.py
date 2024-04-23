@@ -12,15 +12,15 @@ def save_object(obj, file_path):
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         
         # Saving the object using pickle
-        with open(file_path, 'wb') as file:
-            pickle.dump(obj, file)
+        with open(file_path, 'wb') as f:
+            pickle.dump(obj, f)
         
-        logging.INFO(f"File saved successfully at {file_path}")
+        # logging.INFO(f"File saved successfully at {file_path}")
     except Exception as e:
         logging.exception(f"Error saving file: {e}")
         raise DetailedError(e)
 
-def load_pickle(file_path):
+def load_object(file_path):
     try:
         
         # Loading the object using pickle
@@ -30,18 +30,6 @@ def load_pickle(file_path):
         logging.exception(f"Error loading file: {e}")
         raise DetailedError(e)
     
-
-def save_object(obj,file_path):
-    try:
-        dir_path = os.path.dirname(file_path)
-
-        os.makedirs(dir_path, exist_ok=True)
-
-        with open(file_path, "wb") as f:
-            pickle.dump(obj, f)
-
-    except Exception as e:
-        raise DetailedError(e)
 
 
 def evaluate(y_test, y_pred):
