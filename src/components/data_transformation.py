@@ -17,6 +17,8 @@ from pdb import set_trace
 @dataclass
 class DataTransformationConfig:
   preprocessor_obj_file_path = os.path.join('artifacts','preprocessor.pkl')
+  preprocessed_train_file_path = os.path.join('artifacts', 'train_transformed.npy')
+  preprocessed_test_file_path = os.path.join('artifacts', 'test_transformed.npy')
 
 
 class DataTransformation:
@@ -86,13 +88,10 @@ class DataTransformation:
           test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
           save_object(preprocessing_obj, self.data_transformation_config.preprocessor_obj_file_path)
+          np.save(self.data_transformation_config.preprocessed_train_file_path, train_arr)
+          np.save(self.data_transformation_config.preprocessed_test_file_path, test_arr) 
 
           logging.info("Saved preprocessing object")
-
-          return (
-              train_arr,
-              test_arr,
-          )
       except Exception as e:
           logging.info("Exception occured in the initiate_datatransformation")
           raise DetailedError(e)
@@ -100,4 +99,4 @@ class DataTransformation:
 
 if __name__ == "__main__":
     obj = DataTransformation()
-    train_arr, test_arr = obj.initiate_data_transformation(train_path="artifacts/train.csv", test_path="artifacts/test.csv")
+    obj.initiate_data_transformation(train_path="artifacts/train.csv", test_path="artifacts/test.csv")

@@ -15,14 +15,21 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso,ElasticNet
 @dataclass
 class ModelTrainerConfig:
     trained_model_file_path = os.path.join('artifacts', 'model.pkl')
+    preprocessed_train_file_path = os.path.join('artifacts', 'train_transformed.npy')
+    preprocessed_test_file_path = os.path.join('artifacts', 'test_transformed.npy')
 
 
 class ModelTrainer:
     def __init__(self):
         self.model_trainer_config = ModelTrainerConfig()
 
-    def initate_model_training(self, train_array, test_array):
+    def initate_model_training(self):
         try:
+
+            ## load prepocessed object
+            train_array = np.load(self.model_trainer_config.preprocessed_train_file_path)
+            test_array = np.load(self.model_trainer_config.preprocessed_test_file_path)
+
             logging.info('Splitting Dependent and Independent variables from train and test data')
             X_train, y_train, X_test, y_test = (
                 train_array[:, :-1],
@@ -61,4 +68,4 @@ class ModelTrainer:
 
 if __name__ == '__main__':
     obj = ModelTrainer()
-    obj.initate_model_training(train_array=X_train, test_array=X_test)
+    obj.initate_model_training()

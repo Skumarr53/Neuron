@@ -1,0 +1,37 @@
+stages:
+  data_ingestion:
+    cmd: python src/components/data_ingestion.py
+    deps:
+      - src/components/data_ingestion.py
+      - https://raw.githubusercontent.com/abhijitpaul0212/GemstonePricePrediction/master/artifacts/raw.csv
+    outs:
+      - artifacts/data.csv
+      - artifacts/train.csv
+      - artifacts/test.csv
+
+  data_transformation:
+    cmd: python src/components/data_transformation.py
+    deps:
+      - src/components/data_transformation.py
+      - artifacts/train.csv
+      - artifacts/test.csv
+
+    outs:
+      - artifacts/preprocessor.pkl
+      - artifacts/train_transformed.npy
+      - artifacts/test_transformed.npy
+
+  model_training:
+    cmd: python src/components/model_trainer.py
+    deps:
+      - src/components/model_trainer.py
+      - artifacts/train_transformed.npy
+      - artifacts/test_transformed.npy
+
+    outs:
+      - artifacts/model.pkl
+
+  model_evaluation:
+    cmd: python src/components/model_evaluation.py
+    deps:
+      - src/components/model_evaluation.py

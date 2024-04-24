@@ -1,0 +1,82 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/components/data_ingestion.py
+    deps:
+    - path: 
+        https://raw.githubusercontent.com/abhijitpaul0212/GemstonePricePrediction/master/artifacts/raw.csv
+      hash: md5
+      checksum: '"893cf49c4031e766869a49156a93aceb17f32ef37fed73d2d21c5bb9477d5eb7"'
+      size: 10462804
+    - path: src/components/data_ingestion.py
+      hash: md5
+      md5: 088896c5c54bed1e8da54ac6b27e97f2
+      size: 1701
+    outs:
+    - path: artifacts/data.csv
+      hash: md5
+      md5: 14ddfc56c931255ee10d3859d0ac4fc0
+      size: 10462804
+    - path: artifacts/test.csv
+      hash: md5
+      md5: 670c8748030459611277f4d1d8798950
+      size: 2092971
+    - path: artifacts/train.csv
+      hash: md5
+      md5: 6bb3890e0bc856c5c6467e0d2bdc1c4b
+      size: 8369884
+  data_transformation:
+    cmd: python src/components/data_transformation.py
+    deps:
+    - path: artifacts/test.csv
+      hash: md5
+      md5: 670c8748030459611277f4d1d8798950
+      size: 2092971
+    - path: artifacts/train.csv
+      hash: md5
+      md5: 6bb3890e0bc856c5c6467e0d2bdc1c4b
+      size: 8369884
+    - path: src/components/data_transformation.py
+      hash: md5
+      md5: f867fc931ee8ddb361b6dde02ead816a
+      size: 3744
+    outs:
+    - path: artifacts/preprocessor.pkl
+      hash: md5
+      md5: a90642b36c7e3c072bb7dffabb8c5aa2
+      size: 2912
+    - path: artifacts/test_transformed.npy
+      hash: md5
+      md5: 6c025fa5fc274c21ac6ec7fb6de414a3
+      size: 3097328
+    - path: artifacts/train_transformed.npy
+      hash: md5
+      md5: f26144d9c91ad2bbee9ad793e7a5b39e
+      size: 12388768
+  model_training:
+    cmd: python src/components/model_trainer.py
+    deps:
+    - path: artifacts/test_transformed.npy
+      hash: md5
+      md5: 6c025fa5fc274c21ac6ec7fb6de414a3
+      size: 3097328
+    - path: artifacts/train_transformed.npy
+      hash: md5
+      md5: f26144d9c91ad2bbee9ad793e7a5b39e
+      size: 12388768
+    - path: src/components/model_trainer.py
+      hash: md5
+      md5: 85943695050c18fec153b309ecb1d38f
+      size: 2628
+    outs:
+    - path: artifacts/model.pkl
+      hash: md5
+      md5: 6d0c9f7d1445697f7fe7368169213375
+      size: 547
+  model_evaluation:
+    cmd: python src/components/model_evaluation.py
+    deps:
+    - path: src/components/model_evaluation.py
+      hash: md5
+      md5: 703fd166851d57b84b327c31fc8e2327
+      size: 1372

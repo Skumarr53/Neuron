@@ -1,0 +1,15 @@
+artifact_uri: file:///home/skumar/DataScience/Projects/Neuron/mlruns/0/760dfede97cb4916ae27de4e19b11384/artifacts
+end_time: 1713883400633
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 760dfede97cb4916ae27de4e19b11384
+run_name: smiling-ape-241
+run_uuid: 760dfede97cb4916ae27de4e19b11384
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1713883398950
+status: 3
+tags: []
+user_id: skumar
