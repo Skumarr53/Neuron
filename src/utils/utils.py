@@ -5,6 +5,8 @@ import numpy as np
 import pickle
 from typing import Dict, List, Any
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
+
 
 def save_object(obj, file_path):
     try:
@@ -94,3 +96,53 @@ def find_best_model_by_metric(models, metric):
             best_score = metrics[metric]
 
     return best_model, best_score
+
+
+def upload_folder_to_blob(storage_account_name, container_name, folder_path):
+    try:
+        acc_url = f"https://{storage_account_name}.blob.core.windows.net/{container_name}"
+        # Create a BlobServiceClient object
+        blob_service_client = BlobServiceClient(account_url=acc_url, credential=os.environ.get("AZ_BLOB_KEY"))
+
+        # Get a reference to the container
+        container_client = blob_service_client.get_container_client('artifacts')
+
+        # Loop through each file in the folder
+        for file_name in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, file_name)
+
+            # Check if it's a file and not a directory
+            if os.path.isfile(file_path):
+                # Create a blob client using the file name as the name for the blob
+                blob_client = container_client.get_blob_client(blob=file_name)
+
+                # Upload the file to Azure
+                with open(file_path, "rb") as data:
+                    blob_client.upload_blob(data, overwrite=True)
+                    print(f"File {file_path} uploaded to {file_name}")
+
+    except Exception as e:
+        logging.info('Exception occurred')
+        raise DetailedError(e)
+
+
+def download_file_from_blob(storage_account_name, container_name,  local_file_path):
+    try:
+        account_url = f"https://{storage_account_name}.blob.core.windows.net/{container_name}"
+        # Create a BlobServiceClient object
+        blob_service_client = BlobServiceClient(account_url=account_url, credential=os.environ.get("AZ_BLOB_KEY"))
+
+        # Get a reference to the container
+        container_client = blob_service_client.get_container_client(container_name)
+
+        blob_name = os.path.basename(local_file_path)
+        # Create a blob client for the specified blob
+        blob_client = container_client.get_blob_client(blob=blob_name)
+
+        # Download the blob content
+        with open(local_file_path, "wb") as download_file:
+            download_file.write(blob_client.download_blob().readall())
+
+    except Exception as e:
+        logging.info('Exception occurred')
+        raise DetailedError(e)

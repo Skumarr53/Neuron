@@ -1,0 +1,25 @@
+version: "1"
+services:
+  airflow:
+    build:
+      context: ./
+      dockerfile: Dockerfile.airflow
+    image: gemstone.azurecr.io/gemstoneairflw
+    container_name: gemstone-prediction-airflow
+    environment:
+      - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=1000
+      - AZ_STORAGE_ACC_NAME=${AZ_STORAGE_ACC_NAME}
+      - AZ_UPLOAD_CONTAINER_NAME=${AZ_UPLOAD_CONTAINER_NAME}
+      - AZ_DOWNLOAD_CONTAINER_NAME=${AZ_DOWNLOAD_CONTAINER_NAME}
+      - AZ_BLOB_KEY=${AZ_BLOB_KEY}
+    ports:
+      - "8080:8080"
+    
+  flaskapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile.flask
+    image: gemstone.azurecr.io/gemstoneflask
+    container_name: gemstone-prediction-flask
+    ports:
+      - "5000:5000"
