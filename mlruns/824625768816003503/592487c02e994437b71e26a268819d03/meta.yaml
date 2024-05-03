@@ -1,0 +1,15 @@
+artifact_uri: file:///home/skumar/DataScience/Projects/Neuron/mlruns/824625768816003503/592487c02e994437b71e26a268819d03/artifacts
+end_time: 1714489648842
+entry_point_name: ''
+experiment_id: '824625768816003503'
+lifecycle_stage: active
+run_id: 592487c02e994437b71e26a268819d03
+run_name: thoughtful-swan-281
+run_uuid: 592487c02e994437b71e26a268819d03
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714489648783
+status: 3
+tags: []
+user_id: skumar

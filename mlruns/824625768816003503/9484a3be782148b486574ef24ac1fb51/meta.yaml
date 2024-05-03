@@ -1,0 +1,15 @@
+artifact_uri: file:///home/skumar/DataScience/Projects/Neuron/mlruns/824625768816003503/9484a3be782148b486574ef24ac1fb51/artifacts
+end_time: 1714489648685
+entry_point_name: ''
+experiment_id: '824625768816003503'
+lifecycle_stage: active
+run_id: 9484a3be782148b486574ef24ac1fb51
+run_name: masked-finch-107
+run_uuid: 9484a3be782148b486574ef24ac1fb51
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714489648481
+status: 3
+tags: []
+user_id: skumar

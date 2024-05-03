@@ -1,0 +1,15 @@
+artifact_uri: file:///home/skumar/DataScience/Projects/Neuron/mlruns/824625768816003503/519df720b9a44a12acebe4efc242ada0/artifacts
+end_time: 1714719417325
+entry_point_name: ''
+experiment_id: '824625768816003503'
+lifecycle_stage: active
+run_id: 519df720b9a44a12acebe4efc242ada0
+run_name: learned-wolf-259
+run_uuid: 519df720b9a44a12acebe4efc242ada0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714719412532
+status: 3
+tags: []
+user_id: skumar

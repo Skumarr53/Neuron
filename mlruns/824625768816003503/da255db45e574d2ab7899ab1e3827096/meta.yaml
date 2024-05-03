@@ -1,0 +1,15 @@
+artifact_uri: file:///home/skumar/DataScience/Projects/Neuron/mlruns/824625768816003503/da255db45e574d2ab7899ab1e3827096/artifacts
+end_time: 1714719417600
+entry_point_name: ''
+experiment_id: '824625768816003503'
+lifecycle_stage: active
+run_id: da255db45e574d2ab7899ab1e3827096
+run_name: nervous-pig-144
+run_uuid: da255db45e574d2ab7899ab1e3827096
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714719417555
+status: 3
+tags: []
+user_id: skumar
