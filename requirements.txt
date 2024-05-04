@@ -9,6 +9,6 @@ mlflow==2.2.2
 dvc
 apache-airflow
 azure-storage-blob
-
+opencensus-ext-azure==1.1.13
 
 -e .
