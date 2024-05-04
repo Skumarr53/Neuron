@@ -53,11 +53,6 @@ jobs:
           tags: gemstone.azurecr.io/gemstoneflask:${{ github.sha }}
           file: Dockerfile.flask
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Deploy to Azure Web App using Docker Compose
         run: |
           az webapp config container set --name gemstone-new --resource-group Learning-Group --docker-custom-image-name "COMPOSE|$(cat docker-compose.yml)"
